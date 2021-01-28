@@ -1,0 +1,56 @@
+# Import discord package
+import discord
+from discord.ext import commands
+
+#client (the bot)
+client = commands.Bot(command_prefix=["?"])
+
+
+@client.event
+async def on_ready(): #message the bot sends when it gets online
+
+    general_channel = client.get_channel(799057356704317460)
+
+    await general_channel.send('Hello world!') 
+    await client.change_presence(status=discord.Status.online, activity=discord.Game('ramb.ly ?help'))
+    
+import discord
+from discord.ext import commands
+TOKEN = 'Nzk5MDMyODg3NDQ1ODE1MzY3.X_9rXQ.WxLH_1iGcR0GZQF41DlpdNf85Fk'
+INTENTS = discord.Intents.default()
+
+# Startup Information
+@client.event
+async def status():
+    await client.change_presence(activity=discord.Game('ramb.ly'))
+    
+    print('Connected to bot: {}'.format(client.user.name))
+    print('Bot ID: {}'.format(client.user.id))
+
+@client.command(name='ping')
+async def ping(ctx):
+    await ctx.send('pong')
+
+@client.command(name='ramb.ly')
+async def rambly(ctx):
+  await ctx.send('ramb.ly is a online voice chat platform in the style of a retro arcade game!')
+
+
+@client.command(name='bothelp')
+async def bothelp(ctx):
+    await ctx.send('the commands are:ping,hi,custommaps,botcredits,ramb.ly')
+
+
+@client.command(name='hi')
+async def hello(ctx):
+  await ctx.send('hi')
+
+@client.command(name='custommaps')
+async def maps(ctx):
+  await ctx.send('the current completed custom maps are: ramb.ly/cybertown,ramb.ly/forest and ramb.ly/hackerdrinkup')
+
+@client.command(name='botcredits')
+async def credits(ctx):
+  await ctx.send('this bot was made by virt360#2841')
+
+client.run(TOKEN)
